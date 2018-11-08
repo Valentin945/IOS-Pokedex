@@ -15,6 +15,7 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(tapButton))
         PokemonAPI.getList(){ x in
             self.source = x
             self.tableView.reloadData()
@@ -27,7 +28,10 @@ class TableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    @objc func tapButton(){
+        
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -57,7 +61,7 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDescription" {
             let secondVC = segue.destination as? ViewController
-            secondVC?.pokemon = self.pokemon
+            secondVC?.pokemonSelected = self.pokemon
         }
     }
     /*

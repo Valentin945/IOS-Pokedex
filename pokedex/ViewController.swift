@@ -6,27 +6,43 @@
 //  Copyright © 2018 Valentin LAMBERT. All rights reserved.
 //
 
+
 import UIKit
+
 
 class ViewController: UIViewController {
 
- 
+    @IBOutlet weak var UILabelType1: UILabel!
+    @IBOutlet weak var UILabelType2: UILabel!
+    
     @IBOutlet weak var UILabelName: UILabel!
     @IBOutlet weak var UITextView: UITextView!
-    var pokemon: PokemonModel?
+    var pokemonSelected: PokemonModel?
     
     @IBOutlet weak var UIImageView: UIImageView!
     
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (pokemon != nil)
+        if let pokemon = pokemonSelected
         {
-            UITextView.text = pokemon?.description
-            UILabelName.text = pokemon?.name
-            PokemonAPI.getImagePokemon(id: String(pokemon!.id)){image in
+            if let firstType = pokemon.type1 {
+                self.UILabelType1.text = firstType.name
+            }
+            
+            if let secondType = pokemon.type2
+            {
+                self.UILabelType2.text = secondType.name
+            }
+            UITextView.text = pokemon.description
+            UILabelName.text = pokemon.name
+            PokemonAPI.getImagePokemon(id: String(pokemon.id)){image in
                 self.UIImageView.image = image
             }
+            
         }
+        
         // Do any additional setup after loading the view.
     }
     
